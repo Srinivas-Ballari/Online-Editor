@@ -4,6 +4,7 @@ import Editor from "@monaco-editor/react";
 import { EditorNavbar } from '../Components/EditorNavbar';
 import Axios from 'axios';
 import { ClockLoader } from 'react-spinners';
+import { logDOM } from '@testing-library/react';
 
 export const EditorWindow = () => {
   // State variable to set users source code
@@ -31,21 +32,50 @@ export const EditorWindow = () => {
   }
 
   const compile = () => {
-    setLoading(true);
-    if (userCode === ``) return;
-    Axios.post(`http://localhost:3000/compile`, {
-      code: userCode,
-      language: userLang,
-      input: userInput
-    }).then((res) => {
-      setUserOutput(res.data.output);
-    }).then(() => {
-      setLoading(false);
-    })
-  }
+      setLoading(true);
+      if (userCode === ``) {
+        setLoading = false;
+        return;
+      }
 
-  const clearOutput = () => {
-    setUserOutput("");
+      const langNumberMap = {
+        "cpp" : "7",
+        "python" : "5",
+        "c" : "6",
+        "java" : "4"
+      };
+
+      const encodedParams = new URLSearchParams();
+      encodedParams.append("LanguageChoice", langNumberMap[userLang]);
+      encodedParams.append("Program", userCode);
+      encodedParams.append("Input", userInput);
+
+
+      let options = {
+          method: 'POST',
+          url: 'https://code-compiler.p.rapidapi.com/v2',
+          headers: {
+            'content-type': 'application/x-www-form-urlencoded',
+            'x-rapidapi-host': 'code-compiler.p.rapidapi.com',
+            'x-rapidapi-key': '733c4f66dfmsh8e9896736d54bd4p1b27d7jsn20b6d34a73fa'
+          },
+          data: encodedParams
+      };
+
+
+      Axios.request(options)
+      .then( function(response) {
+        let opData = response.data;
+        console.log(opData)
+        opData.Errors==null ? setUserOutput(opData.Result) : setUserOutput(opData.Errors);
+        setLoading(false);
+        // console.log({userOutput})
+
+      }).catch( (error)=> {
+        console.error(error);
+        setUserOutput("Some Error Occured!!");
+      });
+
   }
 
 
@@ -57,15 +87,16 @@ export const EditorWindow = () => {
 
       <div className='centreEditor'>
 
-        <Editor
-          height="calc(100vh - 90px)"
-          width="70%"
-          theme={userTheme}
-          language={userLang}
-          defaultLanguage="python"
-          defaultValue="# Enter your code here"
-          onChange={(value) => { setUserCode(value) }}
-        />
+          <Editor
+            height="calc(100vh - 90px)"
+            width="70%"
+            theme={userTheme}
+            language={userLang}
+            defaultLanguage="python"
+            defaultValue="# Enter your code here"
+            onChange={(value) => { setUserCode(value) }}
+          />
+
       </div>
 
       <br /><br />
@@ -86,9 +117,10 @@ export const EditorWindow = () => {
           ) : (
             <div className="opBox">
               <h3>Standard Output:</h3>
-              <textarea rows={10} cols={60}>
-                  <pre>{userOutput}</pre>
+             <textarea rows={10} cols={60}>
+                {userOutput}
               </textarea>
+
             </div>
           )
         }
@@ -104,7 +136,6 @@ export const EditorWindow = () => {
       </div>
 
       <br /><br />
-
 
     </>
   )
