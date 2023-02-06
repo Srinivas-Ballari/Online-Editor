@@ -1,38 +1,74 @@
-.App {
-  text-align: center;
+.userImg{
+    margin-left: 15px;
+    border-radius: 70%;
+    margin-right: 10px;
+    width: 50%;
+    height: 50%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.userDetails{
+    display: flex;
+    align-items: stretch;
+    
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.newEditorSaved{
+    display: flex;
+    align-items: flex-end;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.row{
+    margin: 0;
+    padding-top:1% ;
+    padding-bottom: 1%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.icons{
+    color: #0a3853;
+    padding-bottom: 23px;
 }
 
-.App-link {
-  color: #61dafb;
+.homeContent h1{
+    text-align: center;
+    margin-top: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.homeContent p{
+    margin: 50px;
+    text-align: center;
+}
+
+.homeContent p:last-child{
+    margin-bottom: 30px;
+}
+
+.plus{
+    border-radius: 50%;
+    
+}
+
+.editorTitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.centreEditor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.runButton{
+    display: flex;
+    justify-content: center;
+}
+
+.io{
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
 }
