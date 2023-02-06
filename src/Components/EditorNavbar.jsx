@@ -24,6 +24,7 @@ export const EditorNavbar = ({ userLang, setUserLang, userTheme,
 					<Select options={languages} value={userLang}
 						onChange={(e) => setUserLang(e.value)}
 						placeholder={userLang} />
+					
 				</div>
 
 				

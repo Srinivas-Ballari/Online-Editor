@@ -72,3 +72,8 @@
     align-items: stretch;
     justify-content: space-around;
 }
+
+.spinner-box{
+    padding-top: 140px;
+    padding-right: 300px;
+}

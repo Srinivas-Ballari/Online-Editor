@@ -15,6 +15,7 @@ export const MyNavbar = () =>{
     }
     const userSignOut = async() =>{
         await signOut(auth);
+        navigate("/");
     }
 
     return (
