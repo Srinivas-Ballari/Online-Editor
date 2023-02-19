@@ -5,6 +5,7 @@ import {BrowserRouter,Route,Routes} from 'react-router-dom';
 import {Home} from './pages/home';
 import {MyNavbar} from './Components/Navbar' 
 import { EditorWindow } from './pages/EditorWindow';
+import { Saved } from './Components/Saved';
 function App() {
 
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/newEditorWindow" element={<EditorWindow/>}/>
+            <Route path="/savedSnippets" element={<Saved/>} />
           </Routes>
         </BrowserRouter>
     </div>

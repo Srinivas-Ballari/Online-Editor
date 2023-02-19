@@ -1,29 +1,18 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Editor from "@monaco-editor/react";
 import { EditorNavbar } from '../Components/EditorNavbar';
 import Axios from 'axios';
 import { ClockLoader } from 'react-spinners';
-import { logDOM } from '@testing-library/react';
+
 
 export const EditorWindow = () => {
-  // State variable to set users source code
+
   const [userCode, setUserCode] = useState(``);
-
-  // State variable to set editors default language
-  const [userLang, setUserLang] = useState("python");
-
-  // State variable to set editors default theme
+  const [userLang, setUserLang] = useState("java");
   const [userTheme, setUserTheme] = useState("vs-dark");
-
-  // State variable to set users input
   const [userInput, setUserInput] = useState("");
-
-  // State variable to set users output
   const [userOutput, setUserOutput] = useState("");
-
-  // Loading state variable to show spinner
-  // while fetching data
   const [loading, setLoading] = useState(false);
 
 
@@ -38,12 +27,53 @@ export const EditorWindow = () => {
         return;
       }
 
+      //  for future Use of multiple language's 
+      // const langNumberMap = {
+      //   "C#" :"1",
+      //   "F#" :"3",
+      //   "Java" :"4",
+      //   "Python" :"5",
+      //   "C" :"6",
+      //   "C++" :"7",
+      //   "Php" :"8",
+      //   "Haskell" :"11",
+      //   "Ruby" :"12",
+      //   "Perl" :"13",
+      //   "Lua" :"14",
+      //   "Nasm" :"15",
+      //   "Javascript" :"17",
+      //   "Go" : "20",
+      //   "Scala" :"21",
+      //   "D" :"30",
+      //   "Swift" :"37",
+      //   "Bash" :"38",
+      //   "Erlang" :"40",
+      //   "Elixir" :"41",
+      //   "Ocaml" :"42",
+      //   "Kotlin" :"43",
+      //   "Rust" :"46",
+      //   "Clojure" :"47",
+      //   "ATS" :"48",
+      //   "Cobol" :"49",
+      //   "Coffeescript" :"50",
+      //   "Crystal" :"51",
+      //   "Elm" :"52",
+      //   "Groovy" :"53",
+      //   "Idris" :"54",
+      //   "Julia" :"55",
+      //   "Mercury" :"56",
+      //   "Nim" :"57",
+      //   "Nix" :"58",
+      //   "Raku" :"59",
+      //   "TypeScript" :"60",
+      // };
+
       const langNumberMap = {
         "cpp" : "7",
         "python" : "5",
         "c" : "6",
         "java" : "4"
-      };
+      }
 
       const encodedParams = new URLSearchParams();
       encodedParams.append("LanguageChoice", langNumberMap[userLang]);
@@ -69,7 +99,6 @@ export const EditorWindow = () => {
         console.log(opData)
         opData.Errors==null ? setUserOutput(opData.Result) : setUserOutput(opData.Errors);
         setLoading(false);
-        // console.log({userOutput})
 
       }).catch( (error)=> {
         console.error(error);
@@ -78,12 +107,19 @@ export const EditorWindow = () => {
 
   }
 
+  const defaultCodeMap = {
+     "python" : "\n#Enter your code here.\n",
+     "java" : "\nimport java.util.*; \nimport java.io.*; \n /* Do not modify the below class name.(It has to be Progman to run code successfully)*/ \nclass Progman{\n    public static void main(String[] args){ \n        // your code goes here... \n    }\n}\n",
+     "cpp" : "\n#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    // your code goes here...\n   \n   return 0;\n}\n",
+     "c" : "\n#include<stdio.h>\nint main(){\n    // your code goes here...\n    return 0;\n}\n"
+  };
+
 
   return (
     <>
 
       <EditorNavbar userLang={userLang} setUserLang={setUserLang}
-        userTheme={userTheme} setUserTheme={setUserTheme} />
+        userTheme={userTheme} setUserTheme={setUserTheme} userCode ={userCode} />
 
       <div className='centreEditor'>
 
@@ -92,21 +128,22 @@ export const EditorWindow = () => {
             width="70%"
             theme={userTheme}
             language={userLang}
-            defaultLanguage="python"
-            defaultValue="# Enter your code here"
+            defaultLanguage={userLang}
+            value={defaultCodeMap[userLang]}
             onChange={(value) => { setUserCode(value) }}
           />
-
+          
       </div>
 
       <br /><br />
 
       <div className='io'>
-        
+
         <div className='ipBox'>
           <h3>Standarad Input:</h3>
           <textarea className='codeInput' onChange=
-              {(e) => setUserInput(e.target.value)} rows={10} cols={60}>
+              {(e) => setUserInput(e.target.value)} rows={10} cols={60}
+              placeholder="  => Make sure to clear the input whenever there is no input reading in your code. ">
           </textarea>
         </div>
 
@@ -117,7 +154,8 @@ export const EditorWindow = () => {
           ) : (
             <div className="opBox">
               <h3>Standard Output:</h3>
-             <textarea rows={10} cols={60}>
+             <textarea rows={10} cols={60} placeholder="  => If Output doesn't load even after a long time ,
+                             [verdict : TLE {Time Limit Exceeded} ] ">
                 {userOutput}
               </textarea>
 
@@ -131,7 +169,7 @@ export const EditorWindow = () => {
 
       <div className='runButton'>
         <button onClick={() => compile()} >
-          <h4>Run <i class="fa-solid fa-1x fa-robot"></i></h4>
+          <h3>Run <i class="fa-solid fa-1x fa-robot"></i></h3>
         </button>
       </div>
 

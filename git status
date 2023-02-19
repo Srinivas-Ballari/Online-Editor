@@ -1,0 +1,23 @@
+[33mcommit 5b3d926cbe80dd15bb51683a53297e8d56a42f66[m[33m ([m[1;36mHEAD -> [m[1;32mfunctionality-added-branch[m[33m)[m
+Author: Srinivas-bz <srinivas@beingzero.in>
+Date:   Thu Feb 9 18:43:27 2023 +0530
+
+    default-code-set-according-to-Lang
+
+[33mcommit e75d432a5f29db953f0c3dbce2ba94f5b035c7c3[m[33m ([m[1;31morigin/functionality-added-branch[m[33m)[m
+Author: Srinivas-bz <srinivas@beingzero.in>
+Date:   Mon Feb 6 21:41:06 2023 +0530
+
+    updated functionality
+
+[33mcommit f4eb09d9f49e7f6bdcd9beccb56fc061f0fc7ede[m
+Author: Srinivas-bz <srinivas@beingzero.in>
+Date:   Mon Feb 6 18:11:54 2023 +0530
+
+    initial-ui-design
+
+[33mcommit 238fc9d82c4554a16864208159cfd0d554b9c98b[m
+Author: Srinivas-bz <srinivas@beingzero.in>
+Date:   Tue Jan 17 19:01:35 2023 +0530
+
+    Initialize project using Create React App
