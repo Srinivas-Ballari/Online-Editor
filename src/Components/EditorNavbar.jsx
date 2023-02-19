@@ -1,8 +1,33 @@
-import React from 'react';
+import { addDoc, collection } from 'firebase/firestore';
+import React, { useState } from 'react';
 import Select from 'react-select';
+import {useAuthState} from 'react-firebase-hooks/auth';
+import { auth } from '../config/firebase';
+import { db } from '../config/firebase';
 
-export const EditorNavbar = ({ userLang, setUserLang, userTheme,
-	setUserTheme }) => {
+export const EditorNavbar = ({ userLang, setUserLang, userTheme, setUserTheme, userCode }) => {
+	const [user] = useAuthState(auth);
+	const [displayNavBar, setDisplayNavBar] = useState(true);
+	const [Title, setTitle] = useState("");
+	const collectionRef = collection(db,user.uid);
+
+
+	const saveSnippet = async() => {
+		// enter data into db:
+		try{
+			if(userCode!=``){
+				const temp = await addDoc(collectionRef,{
+					title : Title,
+					code : userCode,
+					lang : userLang
+				});
+			}
+			setDisplayNavBar(true);
+		}catch(err){
+			console.log(err);
+		}
+		setDisplayNavBar(true);	
+	}
 	const languages = [
 		// for future if mulitptle langs req, uncomment :) 
 		// {value : "C#" 			, label:"C#"	}, 
@@ -52,34 +77,68 @@ export const EditorNavbar = ({ userLang, setUserLang, userTheme,
 		{ value: "vs-dark", label: "Dark" },
 		{ value: "light", label: "Light" },
 	]
+
 	return (
 		<>
-			<div className='editorTitle' style={{ "textAlign": "center", "marginTop": "14px", "marginBottom": "14px" }}>
-				<h1>Happy Coding!</h1>
-			</div>
+			{
+				displayNavBar &&
+				<>
+					<div className='editorTitle' style={{ "textAlign": "center", "marginTop": "14px", "marginBottom": "14px" }}>
+						<h1>Happy Coding!</h1>
+					</div>
 
-			<div className='navbar' style={{"marginBottom":"20px"}}>
-				<div style={{ "marginLeft": "40px", "border": "solid #333366", "borderWidth": "thin" }}>
-					<Select options={languages} value={userLang}
-						onChange={(e) => setUserLang(e.value)}
-						placeholder={userLang} />
-					
-				</div>
+					<div className='navbar' style={{ "marginBottom": "20px" }}>
+						<div style={{ "marginLeft": "40px", "border": "solid #333366", "borderWidth": "thin" }}>
+							<Select options={languages} value={userLang}
+								onChange={(e) => setUserLang(e.value)}
+								placeholder={userLang} />
 
-				
-				<div style={{ "marginRight": "40px", "border": "solid #333366", "borderWidth": "thin" }}>
-					<Select options={themes} value={userTheme}
-						onChange={(e) => setUserTheme(e.value)}
-						placeholder={userTheme} />
-				</div>
+						</div>
 
 
-				<div style={{ "marginRight": "40px", "border": "solid #333366", "borderWidth": "thin" }}>
-					<button><h5>Save <i class="fa-solid fa-floppy-disk"></i></h5></button>
-				</div>
+						<div style={{ "marginRight": "40px", "border": "solid #333366", "borderWidth": "thin" }}>
+							<Select options={themes} value={userTheme}
+								onChange={(e) => setUserTheme(e.value)}
+								placeholder={userTheme} />
+						</div>
 
-			</div>
+
+						<div style={{ "marginRight": "40px", "border": "solid #333366", "borderWidth": "thin" }}>
+							<button onClick={() => { setDisplayNavBar(false) }}><h5>Save <i class="fa-solid fa-floppy-disk"></i></h5></button>
+						</div>
+
+					</div>
+				</>
+
+			}
+
+			{
+				!displayNavBar &&
+
+				<>
+
+					<div className='navbar' style={{"border":"solid #333366","marginTop":"10px","marginBottom":"10px"}}>
+
+						<div style={{"marginLeft":"19px"}}>
+							<h3>Save the code snippet with a title.</h3>
+						</div>
+						
+						<div style={{ "marginLeft": "40", "border": "solid #333366", "marginTop":"30px","marginBottom":"30px" ,"borderWidth": "thin" }}>
+
+							<input type="text" placeholder='Enter title...' onChange={(e) => {
+							setTitle(e.target.value) }} size="40"/>
+
+						</div>
+						<div style={{ "marginRight": "100px", "border": "solid #333366", "borderWidth": "thin" }}>
+							<button onClick={saveSnippet}>Save-Code</button>
+						</div>
+					</div>
+
+				</>
+
+			}
 		</>
+
 	)
 }
 

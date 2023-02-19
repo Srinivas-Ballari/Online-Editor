@@ -4,7 +4,7 @@ import Editor from "@monaco-editor/react";
 import { EditorNavbar } from '../Components/EditorNavbar';
 import Axios from 'axios';
 import { ClockLoader } from 'react-spinners';
-import { logDOM } from '@testing-library/react';
+
 
 export const EditorWindow = () => {
 
@@ -65,7 +65,7 @@ export const EditorWindow = () => {
       //   "Nim" :"57",
       //   "Nix" :"58",
       //   "Raku" :"59",
-      //   "TypeScript" :"60"
+      //   "TypeScript" :"60",
       // };
 
       const langNumberMap = {
@@ -108,10 +108,10 @@ export const EditorWindow = () => {
   }
 
   const defaultCodeMap = {
-     "python" : "#Enter your code here.\n",
-     "java" : "import java.util.*; \nimport java.io.*; \n /* Do not modify the below class name.(It has to be Progman to run code successfully)*/ \nclass Progman{\n    public static void main(String[] args){ \n        // your code goes here... \n    }\n}\n",
-     "cpp" : "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    // your code goes here...\n   \n   return 0;\n}\n",
-     "c" : "#include<stdio.h>\nint main(){\n    // your code goes here...\n    return 0;\n}\n"
+     "python" : "\n#Enter your code here.\n",
+     "java" : "\nimport java.util.*; \nimport java.io.*; \n /* Do not modify the below class name.(It has to be Progman to run code successfully)*/ \nclass Progman{\n    public static void main(String[] args){ \n        // your code goes here... \n    }\n}\n",
+     "cpp" : "\n#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    // your code goes here...\n   \n   return 0;\n}\n",
+     "c" : "\n#include<stdio.h>\nint main(){\n    // your code goes here...\n    return 0;\n}\n"
   };
 
 
@@ -119,7 +119,7 @@ export const EditorWindow = () => {
     <>
 
       <EditorNavbar userLang={userLang} setUserLang={setUserLang}
-        userTheme={userTheme} setUserTheme={setUserTheme} />
+        userTheme={userTheme} setUserTheme={setUserTheme} userCode ={userCode} />
 
       <div className='centreEditor'>
 
@@ -138,7 +138,7 @@ export const EditorWindow = () => {
       <br /><br />
 
       <div className='io'>
-        
+
         <div className='ipBox'>
           <h3>Standarad Input:</h3>
           <textarea className='codeInput' onChange=
@@ -169,7 +169,7 @@ export const EditorWindow = () => {
 
       <div className='runButton'>
         <button onClick={() => compile()} >
-          <h4>Run <i class="fa-solid fa-1x fa-robot"></i></h4>
+          <h3>Run <i class="fa-solid fa-1x fa-robot"></i></h3>
         </button>
       </div>
 
