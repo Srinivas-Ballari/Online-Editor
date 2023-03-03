@@ -6,15 +6,19 @@ import {Home} from './pages/home';
 import {MyNavbar} from './Components/Navbar' 
 import { EditorWindow } from './pages/EditorWindow';
 import { Saved } from './Components/Saved';
-function App() {
+// authentication realted: 
+import { auth } from './config/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
+function App() {
+  const [user] = useAuthState(auth);
   return (
     <div className='App'>
         <BrowserRouter>
           <MyNavbar className="navClass"/>
           <Routes>
             <Route path="/" element={<Home/>}/>
-            <Route path="/newEditorWindow" element={<EditorWindow/>}/>
+            <Route path="/newEditorWindow" element={<EditorWindow user={user}/>}/>
             <Route path="/savedSnippets" element={<Saved/>} />
           </Routes>
         </BrowserRouter>

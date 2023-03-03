@@ -6,7 +6,7 @@ import Axios from 'axios';
 import { ClockLoader } from 'react-spinners';
 
 
-export const EditorWindow = () => {
+export const EditorWindow = (props) => {
 
   const [userCode, setUserCode] = useState(``);
   const [userLang, setUserLang] = useState("java");
@@ -116,6 +116,7 @@ export const EditorWindow = () => {
 
 
   return (
+    props.user &&
     <>
 
       <EditorNavbar userLang={userLang} setUserLang={setUserLang}
