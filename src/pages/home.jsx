@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Modal } from 'react-bootstrap';
 import { Card, Image, Text, Badge, Group } from '@mantine/core';
 import {LandingPage} from './Landing';
-import { OldLanding } from './old';
 
 export const Home = () => {
     const [user] = useAuthState(auth);
