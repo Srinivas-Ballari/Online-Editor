@@ -4,6 +4,7 @@ import Editor from "@monaco-editor/react";
 import { EditorNavbar } from '../Components/EditorNavbar';
 import Axios from 'axios';
 import { ClockLoader } from 'react-spinners';
+import { Button } from 'react-bootstrap';
 
 
 export const EditorWindow = (props) => {
@@ -169,9 +170,9 @@ export const EditorWindow = (props) => {
       <br /><br />
 
       <div className='runButton'>
-        <button onClick={() => compile()} >
+        <Button onClick={() => compile()} variant='dark' >
           <h3>Run <i class="fa-solid fa-1x fa-robot"></i></h3>
-        </button>
+        </Button>
       </div>
 
       <br /><br />

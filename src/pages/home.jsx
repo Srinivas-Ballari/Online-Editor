@@ -1,25 +1,22 @@
-import { auth } from '../config/firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { Button, Modal } from 'react-bootstrap';
-import { Card, Image, Text, Badge, Group } from '@mantine/core';
 import {LandingPage} from './Landing';
 
-export const Home = () => {
-    const [user] = useAuthState(auth);
+export const Home = (props) => {
+    
     const navigate = useNavigate();
     return (
         <>
 
             {
 
-                !user &&
+                !(props.user) &&
                 <LandingPage/>
             }
 
 
             {
-                user &&
+                props.user &&
                 <>
 
                     <div className='newEditorSaved'>

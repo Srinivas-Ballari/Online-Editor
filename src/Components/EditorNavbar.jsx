@@ -4,6 +4,7 @@ import Select from 'react-select';
 import {useAuthState} from 'react-firebase-hooks/auth';
 import { auth } from '../config/firebase';
 import { db } from '../config/firebase';
+import { Button } from 'react-bootstrap';
 
 export const EditorNavbar = ({ userLang, setUserLang, userTheme, setUserTheme, userCode }) => {
 	const [user] = useAuthState(auth);
@@ -84,7 +85,7 @@ export const EditorNavbar = ({ userLang, setUserLang, userTheme, setUserTheme, u
 				displayNavBar &&
 				<>
 					<div className='editorTitle' style={{ "textAlign": "center", "marginTop": "14px", "marginBottom": "14px" }}>
-						<h1>Happy Coding!</h1>
+						<h1 className='hero-title'>Happy Coding!</h1>
 					</div>
 
 					<div className='navbar' style={{ "marginBottom": "20px" }}>
@@ -99,12 +100,12 @@ export const EditorNavbar = ({ userLang, setUserLang, userTheme, setUserTheme, u
 						<div style={{ "marginRight": "40px", "border": "solid #333366", "borderWidth": "thin" }}>
 							<Select options={themes} value={userTheme}
 								onChange={(e) => setUserTheme(e.value)}
-								placeholder={userTheme} />
+								placeholder={userTheme}/>
 						</div>
 
 
-						<div style={{ "marginRight": "40px", "border": "solid #333366", "borderWidth": "thin" }}>
-							<button onClick={() => { setDisplayNavBar(false) }}><h5>Save <i class="fa-solid fa-floppy-disk"></i></h5></button>
+						<div style={{ "marginRight": "40px"}}>
+							<Button onClick={() => { setDisplayNavBar(false) }} variant='success'><h5>Save <i class="fa-solid fa-floppy-disk"></i></h5></Button>
 						</div>
 
 					</div>
@@ -126,11 +127,11 @@ export const EditorNavbar = ({ userLang, setUserLang, userTheme, setUserTheme, u
 						<div style={{ "marginLeft": "40", "border": "solid #333366", "marginTop":"30px","marginBottom":"30px" ,"borderWidth": "thin" }}>
 
 							<input type="text" placeholder='Enter title...' onChange={(e) => {
-							setTitle(e.target.value) }} size="40"/>
+							setTitle(e.target.value) }} size="40" />
 
 						</div>
-						<div style={{ "marginRight": "100px", "border": "solid #333366", "borderWidth": "thin" }}>
-							<button onClick={saveSnippet}>Save-Code</button>
+						<div style={{ "marginRight": "100px"}}>
+							<Button onClick={saveSnippet}>Save-Code</Button>
 						</div>
 					</div>
 

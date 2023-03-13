@@ -17,9 +17,9 @@ function App() {
         <BrowserRouter>
           <MyNavbar className="navClass"/>
           <Routes>
-            <Route path="/" element={<Home/>}/>
+            <Route path="/" element={<Home user = {user} />}/>
             <Route path="/newEditorWindow" element={<EditorWindow user={user}/>}/>
-            <Route path="/savedSnippets" element={<Saved/>} />
+            <Route path="/savedSnippets" element={<Saved user = {user}/>} />
           </Routes>
         </BrowserRouter>
     </div>

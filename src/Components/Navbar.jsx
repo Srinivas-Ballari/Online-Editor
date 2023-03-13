@@ -1,5 +1,3 @@
-import {provider} from '../config/firebase';
-import { signInWithPopup } from 'firebase/auth';
 import {useNavigate} from 'react-router-dom';
 import { auth } from '../config/firebase';
 import {useAuthState} from 'react-firebase-hooks/auth';
@@ -17,13 +15,6 @@ export const MyNavbar = () =>{
     
     return (
         <div className = "loginPage">
-            {
-                !user &&
-                <>
-                     
-                </>
-
-            }
 
             {
                 user &&
@@ -31,7 +22,7 @@ export const MyNavbar = () =>{
                     <Navbar bg="dark" variant="dark"  className="sticky-top">
                         <Container>
                             <Navbar.Brand href="/">
-                                <img src={user?.photoURL} alt="Loading..." style={{"width":"60px","height":"60px",borderRadius:"30%",marginRight:"10px"}}/>
+                                <img src={user?.photoURL} alt="" style={{"width":"60px","height":"60px",borderRadius:"30%",marginRight:"10px"}}/>
                                 NJAC-Editor
                             </Navbar.Brand>
                            
@@ -44,7 +35,7 @@ export const MyNavbar = () =>{
                                 </Navbar.Collapse>
                             </div>
                             
-                            <Button onClick={userSignOut} variant="outline-success">Sign-Out</Button>
+                            <Button onClick={userSignOut} variant="info">Sign-Out</Button>
                         </Container>
                     </Navbar>
                 </>
