@@ -103,9 +103,8 @@ export const EditorNavbar = ({ userLang, setUserLang, userTheme, setUserTheme, u
 								placeholder={userTheme}/>
 						</div>
 
-
 						<div style={{ "marginRight": "40px"}}>
-							<Button onClick={() => { setDisplayNavBar(false) }} variant='success'><h5>Save <i class="fa-solid fa-floppy-disk"></i></h5></Button>
+							<Button onClick={() => { setDisplayNavBar(false) }} variant='dark'><h5>Save <i class="fa-solid fa-floppy-disk"></i></h5></Button>
 						</div>
 
 					</div>

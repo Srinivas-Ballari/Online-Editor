@@ -2,17 +2,29 @@
 import { initializeApp } from "firebase/app";
 import {getAuth, GoogleAuthProvider} from 'firebase/auth';
 import {getFirestore} from "firebase/firestore";
-
 // Your web app's Firebase configuration
+// import dotenv from 'dotenv';
+// dotenv.config();
+
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDqr9XtbguTlUqM0I2tPNK8BP-HRUZCbuQ",
-  authDomain: "firstblogsite-fca7f.firebaseapp.com",
-  projectId: "firstblogsite-fca7f",
-  storageBucket: "firstblogsite-fca7f.appspot.com",
-  messagingSenderId: "1026660422298",
-  appId: "1:1026660422298:web:05dc0f151c6ec76e920523",
-  measurementId: "G-69LWEDX9TB"
+  apiKey: "AIzaSyB9pQ-uYTfZzNX05bkRofpWktOQpKwPixA",
+  authDomain: "njac-editor.firebaseapp.com",
+  projectId: "njac-editor",
+  storageBucket: "njac-editor.appspot.com",
+  messagingSenderId: "122165091841",
+  appId: "1:122165091841:web:866046fce38087a134ea00"
 };
+
+// const firebaseConfig = {
+//   apiKey: process.env.apiKey,
+//   authDomain: process.env.authDomain,
+//   projectId: process.env.projectId,
+//   storageBucket: process.env.storageBucket,
+//   messagingSenderId: process.env.messagingSenderId,
+//   appId: process.env.appId,
+// };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

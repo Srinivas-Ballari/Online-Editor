@@ -1,46 +1,44 @@
-import { collection, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { auth } from "../config/firebase"
+import { useEffect, useState } from "react"
 import { db } from '../config/firebase';
 // imports for centered-modal
 import Modal from 'react-bootstrap/Modal';
 //imports for displaying cards
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { collection, getDocs } from "firebase/firestore";
 
 
-export const Saved = (props) => {
-
-    const user = props.user;
-    const [list, setList] = useState([{}]);
-    // setList(...props.list);
-    let userCollection;
-    let userCodeCollectionRef;
-    useEffect(() => {
-        // getting all the documents from the firestore database : 
-        const func = async () => {
-            try {
-                userCollection = props.user.uid;
-                console.log(typeof(userCollection));
-                userCodeCollectionRef = collection(db, userCollection);
-                const data = await getDocs(userCodeCollectionRef);
-                const filtered = data.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                }));
-                setList(filtered);
-                console.log(list);
-            } catch (err) {
-                console.log("Error occured: " + err);
-            }
+export const Saved = (props) =>{
+    const[list,setList]  = useState([{}])
+    
+    const getList = async ()=>{
+        const userCollection = auth?.currentUser?.uid;
+        const userCodeCollectionRef = collection(db,userCollection);
+        try {
+            const data = await getDocs(userCodeCollectionRef);
+            const filtered = data.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id,
+            }));
+            setList(filtered);
         }
-        func();
-    }, [list]);
+        catch (error) {
+            console.log(error);
+        }
+
+    }
+    
+    useEffect(() => {
+        getList();
+    },[]);
 
     return (
         <>
             <h3 className = "hero-title" style={{ "textAlign": "center", "marginTop": "30px", "marginBottom": "35px" }}>Review Your Code's </h3>
 
             <div style={{ "display": "grid", "grid-template-columns": "repeat(4, 1fr)", "grid-auto-rows": "400px", "marginLeft": "60px" }}>
+
                 {list.map((doc) => (
                     <div >
 
@@ -53,7 +51,8 @@ export const Saved = (props) => {
                                     Language : {doc.lang}
                                 </Card.Text>
                                 <Button variant="primary" onClick={()=> {
-                                    console.log(doc.id);
+                                    // console.log(doc.id);
+                                    
                                 }}> Open </Button>
 
                             </Card.Body>

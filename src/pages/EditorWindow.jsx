@@ -5,7 +5,7 @@ import { EditorNavbar } from '../Components/EditorNavbar';
 import Axios from 'axios';
 import { ClockLoader } from 'react-spinners';
 import { Button } from 'react-bootstrap';
-
+import { MyNavbar } from '../Components/Navbar';
 
 export const EditorWindow = (props) => {
 
@@ -171,7 +171,7 @@ export const EditorWindow = (props) => {
 
       <div className='runButton'>
         <Button onClick={() => compile()} variant='dark' >
-          <h3>Run <i class="fa-solid fa-1x fa-robot"></i></h3>
+          <h3>Run <i class="fa-sharp fa-solid fa-person-running"></i></h3>
         </Button>
       </div>
 

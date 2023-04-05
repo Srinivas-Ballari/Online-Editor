@@ -7,7 +7,7 @@ import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navbar, Button, Container } from 'react-bootstrap';
 import logoImage from '../images/njac-logo.jpeg';
-
+import { MyNavbar } from '../Components/Navbar';
 
 export function LandingPage() {
 
@@ -25,6 +25,7 @@ export function LandingPage() {
     }
 
     return (
+
         <div className="App">
 
             <Navbar bg="dark" variant="dark" className="navtop">
