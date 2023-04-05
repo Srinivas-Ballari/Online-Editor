@@ -1,13 +1,18 @@
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Editor from "@monaco-editor/react";
 import { EditorNavbar } from '../Components/EditorNavbar';
 import Axios from 'axios';
 import { ClockLoader } from 'react-spinners';
 import { Button } from 'react-bootstrap';
-import { MyNavbar } from '../Components/Navbar';
+import { useLocation } from "react-router-dom"
+
 
 export const EditorWindow = (props) => {
+
+    // if user has clicked open code in the Saved field.
+    const {state} = useLocation();
+    const {id,title,code,lang} = state ? state : "";
 
   const [userCode, setUserCode] = useState(``);
   const [userLang, setUserLang] = useState("java");
@@ -16,6 +21,7 @@ export const EditorWindow = (props) => {
   const [userOutput, setUserOutput] = useState("");
   const [loading, setLoading] = useState(false);
 
+  
 
   const userInputUpdate = (event) => {
     setUserInput(event.target.value);
@@ -109,10 +115,10 @@ export const EditorWindow = (props) => {
   }
 
   const defaultCodeMap = {
-     "python" : "\n#Enter your code here.\n",
-     "java" : "\nimport java.util.*; \nimport java.io.*; \n /* Do not modify the below class name.(It has to be Progman to run code successfully)*/ \nclass Progman{\n    public static void main(String[] args){ \n        // your code goes here... \n    }\n}\n",
-     "cpp" : "\n#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    // your code goes here...\n   \n   return 0;\n}\n",
-     "c" : "\n#include<stdio.h>\nint main(){\n    // your code goes here...\n    return 0;\n}\n"
+     "python" : code ? code : "\n#Enter your code here.\n",
+     "java" : code ? code : "\nimport java.util.*; \nimport java.io.*; \n /* Do not modify the below class name.(It has to be Progman to run code successfully)*/ \nclass Progman{\n    public static void main(String[] args){ \n        // your code goes here... \n    }\n}\n",
+     "cpp" : code ? code : "\n#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    // your code goes here...\n   \n   return 0;\n}\n",
+     "c" : code ? code : "\n#include<stdio.h>\nint main(){\n    // your code goes here...\n    return 0;\n}\n"
   };
 
 
@@ -120,7 +126,7 @@ export const EditorWindow = (props) => {
     props.user &&
     <>
 
-      <EditorNavbar userLang={userLang} setUserLang={setUserLang}
+      <EditorNavbar userLang={lang ? lang : userLang} setUserLang={setUserLang}
         userTheme={userTheme} setUserTheme={setUserTheme} userCode ={userCode} />
 
       <div className='centreEditor'>
@@ -145,7 +151,12 @@ export const EditorWindow = (props) => {
           <h3>Standarad Input:</h3>
           <textarea className='codeInput' onChange=
               {(e) => setUserInput(e.target.value)} rows={10} cols={60}
-              placeholder="  => Make sure to clear the input whenever there is no input reading in your code. ">
+              placeholder="           
+              
+                              
+               Enter your input here
+              
+              ">
           </textarea>
         </div>
 
@@ -156,8 +167,11 @@ export const EditorWindow = (props) => {
           ) : (
             <div className="opBox">
               <h3>Standard Output:</h3>
-             <textarea rows={10} cols={60} placeholder="  => If Output doesn't load even after a long time ,
-                             [verdict : TLE {Time Limit Exceeded} ] ">
+             <textarea rows={10} cols={60} placeholder="
+             
+
+                Your output here
+             ">
                 {userOutput}
               </textarea>
 

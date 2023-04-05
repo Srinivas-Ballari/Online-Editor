@@ -36,6 +36,7 @@ export const MyNavbar = () =>{
                             </div>
                             
                             <Button onClick={userSignOut} variant="info">Sign-Out</Button>
+
                         </Container>
                     </Navbar>
                 </>

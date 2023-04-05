@@ -1,17 +1,16 @@
 import { auth } from "../config/firebase"
 import { useEffect, useState } from "react"
 import { db } from '../config/firebase';
-// imports for centered-modal
-import Modal from 'react-bootstrap/Modal';
-//imports for displaying cards
+
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { collection, getDocs } from "firebase/firestore";
-
+import {useNavigate} from 'react-router-dom';
 
 export const Saved = (props) =>{
     const[list,setList]  = useState([{}])
-    
+    const navigate = useNavigate();
+
     const getList = async ()=>{
         const userCollection = auth?.currentUser?.uid;
         const userCodeCollectionRef = collection(db,userCollection);
@@ -50,10 +49,11 @@ export const Saved = (props) =>{
                                 <Card.Text>
                                     Language : {doc.lang}
                                 </Card.Text>
-                                <Button variant="primary" onClick={()=> {
-                                    // console.log(doc.id);
-                                    
-                                }}> Open </Button>
+                                <Button variant="primary" onClick={()=>{
+                                    // navigate("/openCode",{state : {id : doc.id, title:doc.title, code:doc.code,lang:doc.lang}});
+                                    navigate("/newEditorWindow",{state : {id : doc.id, title:doc.title, code:doc.code,lang:doc.lang}});
+                                }
+                                }> Open </Button>
 
                             </Card.Body>
 

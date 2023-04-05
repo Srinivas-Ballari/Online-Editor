@@ -7,9 +7,10 @@ import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navbar, Button, Container } from 'react-bootstrap';
 import logoImage from '../images/njac-logo.jpeg';
-import { MyNavbar } from '../Components/Navbar';
+
 
 export function LandingPage() {
+
 
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
@@ -22,6 +23,10 @@ export function LandingPage() {
             console.log(err);
         }
         
+    }
+
+    const gotoLocation = (element)=>{
+        element === "about" ? window.scrollTo(0,1100) : window.scrollTo(0,3000);
     }
 
     return (
@@ -37,16 +42,16 @@ export function LandingPage() {
                     </Navbar.Brand>
                 </Container>
 
-                <Button variant="info" style={{ "marginRight": "15px" , "marginTop": "15px"}}>Home</Button>
-                <Button variant="info" style={{ "marginRight": "15px" ,"marginTop": "15px" }} >About</Button>
-                <Button variant="info" style={{ "marginRight": "30px" ,"marginTop": "15px" }} >Contact</Button>
+                <Button variant="info" style={{ "marginRight": "15px" , "marginTop": "7px"}} >Home</Button>
+                <Button variant="info" style={{ "marginRight": "15px" ,"marginTop": "7px" }} onClick={()=>{gotoLocation("about")}} >About</Button>
+                <Button variant="info" style={{ "marginRight": "30px" ,"marginTop": "7px" }} onClick={()=>{gotoLocation("contact")}}>Contact</Button>
             </Navbar>
 
-            <section className="hero">
+            <section className="hero" >
                 <h1 className="hero-title">Welcome to NJAC Editor</h1>
                 <p className="hero-description">NJAC Editor is "NOT JUST A CODE EDITOR", it is a tool that allows you to compile source code and run it in several different programming languages online as well as to store the code snippets of users.</p>
                 <button className="hero-button" onClick={googleSignIn}>Get Started</button>
-                <img className="hero-image" src={"https://uploads-ssl.webflow.com/612e545fdda38481883243da/624610c87ca2ba4b588f47b7_lawyer%20coder.png"} />
+                <img className="hero-image" src={"https://uploads-ssl.webflow.com/612e545fdda38481883243da/624610c87ca2ba4b588f47b7_lawyer%20coder.png"} alt="Loading..."/>
             </section>
 
             <section className="about" id='about'>
@@ -58,13 +63,13 @@ export function LandingPage() {
                 <div className="row">
                     <div className="icons col-lg-4">
                         <i className="fa-solid fa-code fa-3x iconText"></i>
-                        <h4>Code Effectively</h4>
-                        <p>supports 4 different languages</p>
+                        <h4 className='hero-title'>Code Effectively</h4>
+                        <p  className="hero-description">supports 4 different languages</p>
                     </div>
                     <div className="icons col-lg-4">
                         <i className="fa-solid fa-file-code fa-3x iconText"></i>
-                        <h4>Save Code Snippet's</h4>
-                        <p>capture your learning's in one click</p>
+                        <h4 className='hero-title'>Save Code Snippet's</h4>
+                        <p  className="hero-description">capture your learning's in one click</p>
                     </div>
 
                 </div>
@@ -73,8 +78,8 @@ export function LandingPage() {
 
                     <div className="icons col-lg-4">
                         <i className="fa-solid fab fa-leanpub fa-3x iconText"></i>
-                        <h4>Review</h4>
-                        <p>learn from the saved code file's.</p>
+                        <h4 className='hero-title'>Review</h4>
+                        <p  className="hero-description">learn from the saved code file's.</p>
                     </div>
                 </div>
             </section>
@@ -82,7 +87,7 @@ export function LandingPage() {
 
             <section className="contact" id='contact'>
                 <h4 className='hero-title'>Contact Us</h4>
-                <p>For any queries, please reach out to us at <a href="mailto:support@njaceditor.com">support@njaceditor.com</a>.</p>
+                <p  className="hero-description">For any queries, please reach out to us at <a href="mailto:support@njaceditor.com">support@njaceditor.com</a>.</p>
             </section>
 
             <footer className="footer">
