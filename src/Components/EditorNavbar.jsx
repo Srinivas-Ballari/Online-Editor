@@ -5,6 +5,8 @@ import {useAuthState} from 'react-firebase-hooks/auth';
 import { auth } from '../config/firebase';
 import { db } from '../config/firebase';
 import { Button } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const EditorNavbar = ({ userLang, setUserLang, userTheme, setUserTheme, userCode }) => {
 	const [user] = useAuthState(auth);
@@ -23,9 +25,29 @@ export const EditorNavbar = ({ userLang, setUserLang, userTheme, setUserTheme, u
 					lang : userLang
 				});
 			}
+			toast.success("Saving code...!", {
+				position: "bottom-left",
+				autoClose: 1800,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "dark",
+			});
 			setDisplayNavBar(true);
 		}catch(err){
 			console.log(err);
+			toast.error('Some error occured !', {
+				position: "bottom-left",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "colored",
+			});
 		}
 		setDisplayNavBar(true);	
 	}
@@ -133,10 +155,11 @@ export const EditorNavbar = ({ userLang, setUserLang, userTheme, setUserTheme, u
 							<Button onClick={saveSnippet}>Save-Code</Button>
 						</div>
 					</div>
-
 				</>
 
 			}
+
+		<ToastContainer />
 		</>
 
 	)

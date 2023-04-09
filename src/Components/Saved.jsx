@@ -50,7 +50,6 @@ export const Saved = (props) =>{
                                     Language : {doc.lang}
                                 </Card.Text>
                                 <Button variant="primary" onClick={()=>{
-                                    // navigate("/openCode",{state : {id : doc.id, title:doc.title, code:doc.code,lang:doc.lang}});
                                     navigate("/newEditorWindow",{state : {id : doc.id, title:doc.title, code:doc.code,lang:doc.lang}});
                                 }
                                 }> Open </Button>
