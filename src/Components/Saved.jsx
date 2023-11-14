@@ -30,7 +30,7 @@ export const Saved = (props) =>{
     
     useEffect(() => {
         getList();
-    },[]);
+    },[props]);
 
     return (
         <>

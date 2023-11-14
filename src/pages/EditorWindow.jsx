@@ -10,7 +10,6 @@ import { useLocation } from "react-router-dom"
 
 export const EditorWindow = (props) => {
 
-    // if user has clicked open code in the Saved field.
     const {state} = useLocation();
     const {id,title,code,lang} = state ? state : "";
 
